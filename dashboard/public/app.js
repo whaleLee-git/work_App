@@ -19,9 +19,9 @@ function render(status) {
   overallProgressEl.textContent = `${project.overallProgress ?? 0}%`;
   overallBarEl.style.width = `${project.overallProgress ?? 0}%`;
   activeCountEl.textContent = `${running} / ${agents.length}`;
-  blockedCountEl.textContent = `Blocked: ${blocked}`;
+  blockedCountEl.textContent = `阻塞：${blocked}`;
   phaseNameEl.textContent = currentPhase;
-  lastUpdatedEl.textContent = `Last update: ${formatTime(project.lastUpdated)}`;
+  lastUpdatedEl.textContent = `最近更新：${formatTime(project.lastUpdated)}`;
 
   gridEl.innerHTML = "";
   for (const agent of agents) {
@@ -37,11 +37,11 @@ function render(status) {
 
     nameEl.textContent = agent.name || agent.id;
     statusEl.textContent = normalizeStatus(agent.status);
-    taskEl.textContent = `Current: ${agent.currentTask || "-"}`;
+    taskEl.textContent = `当前任务：${agent.currentTask || "-"}`;
     barEl.style.width = `${agent.progress || 0}%`;
-    progressEl.textContent = `Progress ${agent.progress || 0}%`;
-    etaEl.textContent = `ETA ${agent.eta || "-"}`;
-    blockerEl.textContent = `Blocker: ${agent.blockedBy || "None"}`;
+    progressEl.textContent = `进度 ${agent.progress || 0}%`;
+    etaEl.textContent = `预计完成 ${agent.eta || "-"}`;
+    blockerEl.textContent = `阻塞项：${agent.blockedBy || "无"}`;
     statusEl.style.color = pickStatusColor(agent.status);
     statusEl.style.borderColor = pickStatusColor(agent.status);
     card.dataset.agentId = agent.id;
@@ -58,26 +58,26 @@ function pickStatusColor(status) {
 }
 
 function normalizeStatus(status) {
-  if (status === "in_progress") return "In Progress";
-  if (status === "blocked") return "Blocked";
-  if (status === "done") return "Done";
-  if (status === "todo") return "Todo";
-  return status || "Unknown";
+  if (status === "in_progress" || status === "进行中") return "进行中";
+  if (status === "blocked" || status === "阻塞") return "阻塞";
+  if (status === "done" || status === "完成") return "完成";
+  if (status === "todo" || status === "待办") return "待办";
+  return status || "未知";
 }
 
 function detectPhase(agents) {
-  const running = agents.find((x) => x.status === "in_progress");
+  const running = agents.find((x) => x.status === "in_progress" || x.status === "进行中");
   if (running) return running.name;
-  const blocked = agents.find((x) => x.status === "blocked");
-  if (blocked) return `${blocked.name} (Blocked)`;
-  return "Planning";
+  const blocked = agents.find((x) => x.status === "blocked" || x.status === "阻塞");
+  if (blocked) return `${blocked.name}（阻塞）`;
+  return "规划中";
 }
 
 function formatTime(value) {
   if (!value) return "--";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleString();
+  return date.toLocaleString("zh-CN");
 }
 
 async function bootstrap() {
@@ -86,13 +86,13 @@ async function bootstrap() {
     const initial = await res.json();
     render(initial);
   } catch (error) {
-    liveStateEl.textContent = "Offline";
+    liveStateEl.textContent = "离线";
     liveDotEl.style.background = "#ff6b6b";
   }
 
   const source = new EventSource("/events");
   source.onopen = () => {
-    liveStateEl.textContent = "Live";
+    liveStateEl.textContent = "实时";
     liveDotEl.style.background = "#22d3a5";
     liveDotEl.style.boxShadow = "0 0 12px #22d3a5";
   };
@@ -105,7 +105,7 @@ async function bootstrap() {
     }
   };
   source.onerror = () => {
-    liveStateEl.textContent = "Reconnecting...";
+    liveStateEl.textContent = "重连中...";
     liveDotEl.style.background = "#ffd166";
     liveDotEl.style.boxShadow = "0 0 12px #ffd166";
   };

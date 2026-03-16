@@ -7,74 +7,74 @@
   "agents": [
     {
       "id": "pm",
-      "name": "PM Agent",
-      "status": "done",
-      "currentTask": "Freeze MVP scope and acceptance criteria",
+      "name": "PM 代理",
+      "status": "完成",
+      "currentTask": "冻结 MVP 范围与验收标准",
       "progress": 100,
       "blockedBy": "",
-      "eta": "Done"
+      "eta": "已完成"
     },
     {
       "id": "tech_lead",
-      "name": "Tech Lead Agent",
-      "status": "in_progress",
-      "currentTask": "Define dashboard architecture and API contract",
+      "name": "技术负责人代理",
+      "status": "进行中",
+      "currentTask": "定义看板架构与接口契约",
       "progress": 65,
       "blockedBy": "",
       "eta": "2026-03-17"
     },
     {
       "id": "backend",
-      "name": "Backend Agent",
-      "status": "in_progress",
-      "currentTask": "Implement status service and event stream",
+      "name": "后端代理",
+      "status": "进行中",
+      "currentTask": "实现状态服务与事件推送流",
       "progress": 40,
       "blockedBy": "",
       "eta": "2026-03-18"
     },
     {
       "id": "frontend",
-      "name": "Frontend Agent",
-      "status": "in_progress",
-      "currentTask": "Build mission control dashboard UI",
+      "name": "前端代理",
+      "status": "进行中",
+      "currentTask": "搭建任务看板界面",
       "progress": 35,
       "blockedBy": "",
       "eta": "2026-03-18"
     },
     {
       "id": "qa",
-      "name": "QA Agent",
-      "status": "todo",
-      "currentTask": "Prepare regression checklist for dashboard updates",
+      "name": "测试代理",
+      "status": "待办",
+      "currentTask": "准备看板更新的回归清单",
       "progress": 10,
-      "blockedBy": "Waiting for backend/frontend integration",
+      "blockedBy": "等待前后端联调完成",
       "eta": "2026-03-19"
     },
     {
       "id": "devops",
-      "name": "DevOps Agent",
-      "status": "todo",
-      "currentTask": "Prepare CI pipeline for dashboard server",
+      "name": "DevOps 代理",
+      "status": "待办",
+      "currentTask": "准备看板服务的 CI 流水线",
       "progress": 10,
-      "blockedBy": "Waiting for stable startup command",
+      "blockedBy": "等待启动命令稳定",
       "eta": "2026-03-19"
     },
     {
       "id": "security",
-      "name": "Security Agent",
-      "status": "blocked",
-      "currentTask": "Review auth and data exposure rules",
+      "name": "安全代理",
+      "status": "阻塞",
+      "currentTask": "审查鉴权与数据暴露规则",
       "progress": 20,
-      "blockedBy": "Need API freeze from Tech Lead",
+      "blockedBy": "需要技术负责人冻结 API",
       "eta": "2026-03-20"
     },
     {
       "id": "docs",
-      "name": "Docs Agent",
-      "status": "todo",
-      "currentTask": "Draft dashboard quickstart and API examples",
+      "name": "文档代理",
+      "status": "待办",
+      "currentTask": "编写看板快速开始与 API 示例",
       "progress": 15,
-      "blockedBy": "Need final API and release flow",
+      "blockedBy": "需要最终 API 与发布流程",
       "eta": "2026-03-20"
     }
   ]

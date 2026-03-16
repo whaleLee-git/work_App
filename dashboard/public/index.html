@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agent Mission Control</title>
+    <title>代理任务看板</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,37 +18,37 @@
       <header class="hero">
         <div>
           <p class="eyebrow">projectOne</p>
-          <h1>Agent Mission Control</h1>
-          <p id="last-updated">Last update: --</p>
+          <h1>代理任务看板</h1>
+          <p id="last-updated">最近更新：--</p>
         </div>
         <div class="connection">
           <span id="live-dot"></span>
-          <span id="live-state">Connecting...</span>
+          <span id="live-state">连接中...</span>
         </div>
       </header>
 
       <section class="summary">
         <article class="summary-card">
-          <p class="label">Overall Progress</p>
+          <p class="label">总体进度</p>
           <p class="big-number" id="overall-progress">0%</p>
           <div class="track">
             <div class="bar" id="overall-bar"></div>
           </div>
         </article>
         <article class="summary-card">
-          <p class="label">Agents Active</p>
+          <p class="label">活跃代理</p>
           <p class="big-number" id="active-count">0 / 0</p>
-          <p class="tiny" id="blocked-count">Blocked: 0</p>
+          <p class="tiny" id="blocked-count">阻塞：0</p>
         </article>
         <article class="summary-card">
-          <p class="label">Current Phase</p>
+          <p class="label">当前阶段</p>
           <p class="big-number" id="phase-name">--</p>
-          <p class="tiny">Driven by workflow milestone</p>
+          <p class="tiny">按当前工作流里程碑推断</p>
         </article>
       </section>
 
       <section class="agents">
-        <h2>Agent Status</h2>
+        <h2>代理状态</h2>
         <div id="agent-grid" class="agent-grid"></div>
       </section>
     </main>
