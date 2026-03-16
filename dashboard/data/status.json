@@ -1,0 +1,81 @@
+{
+  "project": {
+    "name": "projectOne",
+    "lastUpdated": "2026-03-16T10:00:00.000Z",
+    "overallProgress": 28
+  },
+  "agents": [
+    {
+      "id": "pm",
+      "name": "PM Agent",
+      "status": "done",
+      "currentTask": "Freeze MVP scope and acceptance criteria",
+      "progress": 100,
+      "blockedBy": "",
+      "eta": "Done"
+    },
+    {
+      "id": "tech_lead",
+      "name": "Tech Lead Agent",
+      "status": "in_progress",
+      "currentTask": "Define dashboard architecture and API contract",
+      "progress": 65,
+      "blockedBy": "",
+      "eta": "2026-03-17"
+    },
+    {
+      "id": "backend",
+      "name": "Backend Agent",
+      "status": "in_progress",
+      "currentTask": "Implement status service and event stream",
+      "progress": 40,
+      "blockedBy": "",
+      "eta": "2026-03-18"
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend Agent",
+      "status": "in_progress",
+      "currentTask": "Build mission control dashboard UI",
+      "progress": 35,
+      "blockedBy": "",
+      "eta": "2026-03-18"
+    },
+    {
+      "id": "qa",
+      "name": "QA Agent",
+      "status": "todo",
+      "currentTask": "Prepare regression checklist for dashboard updates",
+      "progress": 10,
+      "blockedBy": "Waiting for backend/frontend integration",
+      "eta": "2026-03-19"
+    },
+    {
+      "id": "devops",
+      "name": "DevOps Agent",
+      "status": "todo",
+      "currentTask": "Prepare CI pipeline for dashboard server",
+      "progress": 10,
+      "blockedBy": "Waiting for stable startup command",
+      "eta": "2026-03-19"
+    },
+    {
+      "id": "security",
+      "name": "Security Agent",
+      "status": "blocked",
+      "currentTask": "Review auth and data exposure rules",
+      "progress": 20,
+      "blockedBy": "Need API freeze from Tech Lead",
+      "eta": "2026-03-20"
+    },
+    {
+      "id": "docs",
+      "name": "Docs Agent",
+      "status": "todo",
+      "currentTask": "Draft dashboard quickstart and API examples",
+      "progress": 15,
+      "blockedBy": "Need final API and release flow",
+      "eta": "2026-03-20"
+    }
+  ]
+}
