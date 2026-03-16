@@ -1,0 +1,171 @@
+version: 1
+project:
+  name: projectOne
+  stack:
+    frontend: TBD
+    backend: TBD
+    database: TBD
+    infra: TBD
+  branch_strategy:
+    main: production
+    develop: integration
+    feature_prefix: "feature/"
+    fix_prefix: "fix/"
+
+workflow:
+  sequence:
+    - pm
+    - tech_lead
+    - backend
+    - frontend
+    - qa
+    - devops
+    - security
+    - docs
+  handoff_template:
+    - context
+    - input
+    - output
+    - risks
+    - next
+
+agents:
+  - id: pm
+    name: PM Agent
+    goal: 拆解需求并定义可验证验收标准
+    inputs:
+      - 业务目标
+      - 用户反馈
+      - 约束条件
+    outputs:
+      - docs/prd.md
+      - docs/backlog.md
+    dod:
+      - 用户故事具备验收标准
+      - 优先级明确为 P0/P1/P2
+    handoff_to:
+      - tech_lead
+
+  - id: tech_lead
+    name: Tech Lead Agent
+    goal: 输出架构方案、边界和接口契约
+    inputs:
+      - docs/prd.md
+      - docs/backlog.md
+    outputs:
+      - docs/architecture.md
+      - docs/api.yaml
+      - docs/adr.md
+    dod:
+      - 模块职责边界明确
+      - API 字段冻结并可联调
+    handoff_to:
+      - backend
+      - frontend
+
+  - id: backend
+    name: Backend Agent
+    goal: 实现服务端能力并保障可测试性
+    inputs:
+      - docs/architecture.md
+      - docs/api.yaml
+    outputs:
+      - src/backend/
+      - docs/db-migration.md
+    dod:
+      - 单元测试通过
+      - 关键日志与错误码齐全
+    handoff_to:
+      - frontend
+      - qa
+    commands:
+      - "<fill-backend-build-command>"
+      - "<fill-backend-test-command>"
+
+  - id: frontend
+    name: Frontend Agent
+    goal: 实现页面与交互并完成接口联调
+    inputs:
+      - docs/api.yaml
+      - docs/architecture.md
+    outputs:
+      - src/frontend/
+      - docs/ui-notes.md
+    dod:
+      - 主路径可用
+      - 空态/错误态可用
+    handoff_to:
+      - qa
+    commands:
+      - "<fill-frontend-build-command>"
+      - "<fill-frontend-test-command>"
+
+  - id: qa
+    name: QA Agent
+    goal: 用例覆盖、回归验证、缺陷闭环
+    inputs:
+      - docs/prd.md
+      - 可部署联调版本
+    outputs:
+      - docs/test-cases.md
+      - docs/test-report.md
+      - docs/bug-list.md
+    dod:
+      - P0/P1 缺陷清零
+      - 回归通过
+    handoff_to:
+      - backend
+      - frontend
+      - devops
+
+  - id: devops
+    name: DevOps Agent
+    goal: 保证构建发布稳定并可回滚
+    inputs:
+      - 可发布分支
+      - 环境配置
+      - docs/test-report.md
+    outputs:
+      - .github/workflows/
+      - docs/release.md
+      - docs/runbook.md
+    dod:
+      - 一键部署可执行
+      - 回滚路径可演练
+    handoff_to:
+      - security
+      - docs
+    commands:
+      - "<fill-ci-command>"
+      - "<fill-deploy-command>"
+
+  - id: security
+    name: Security Agent
+    goal: 降低漏洞风险与合规风险
+    inputs:
+      - 代码与依赖清单
+      - 部署配置
+    outputs:
+      - docs/security-checklist.md
+      - docs/security-report.md
+    dod:
+      - 高危漏洞为 0
+      - 核心接口鉴权通过
+    handoff_to:
+      - backend
+      - devops
+      - docs
+
+  - id: docs
+    name: Docs Agent
+    goal: 形成可复用、可 onboarding 的文档资产
+    inputs:
+      - 各 agent 的最终输出
+    outputs:
+      - README.md
+      - CHANGELOG.md
+      - docs/quickstart.md
+    dod:
+      - 新成员可按文档完成启动与验证
+      - 发布信息可追溯
+    handoff_to: []
